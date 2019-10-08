@@ -1,5 +1,10 @@
 class TweetsController < ApplicationController
-  before_action :move_to_index, except: :index
+  before_action :move_to_index, except: [:index, :show]
+  
+   def show
+    @tweet = Tweet.find(params[:id])
+     @comments = @tweet.comments.includes(:user)
+  end
   
   
   def index 
